@@ -16,7 +16,7 @@ class Soal_pelajaran extends CI_Controller{
      */
     function index()
     {
-        $data['soal_pelajarans'] = $this->Soal_pelajaran_model->get_all_soal_pelajarans();
+        $data['soal_pelajarans'] = $this->Soal_pelajaran_model->get_all_soal_pelajarans_join();
         
         $data['_view'] = 'soal_pelajaran/index';
         $this->load->view('layouts/main',$data);

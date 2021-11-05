@@ -1,4 +1,4 @@
-<?php echo form_open('anggota_ruang/add',array("class"=>"form-horizontal")); ?>
+ <?php echo form_open('anggota_ruang/add',array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="ID_USER" class="col-md-4 control-label">User</label>

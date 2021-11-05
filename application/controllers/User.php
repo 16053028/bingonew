@@ -16,7 +16,7 @@ class User extends CI_Controller{
      */
     function index()
     {
-        $data['users'] = $this->User_model->get_all_users();
+        $data['users'] = $this->User_model->get_all_user_join();
         
         $data['_view'] = 'user/index';
         $this->load->view('layouts/main',$data);

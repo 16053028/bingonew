@@ -53,4 +53,28 @@ class Login_model extends CI_Model
     {
         return $this->db->delete('TBL_LOGIN',array('ID_TBL_LOGIN'=>$ID_TBL_LOGIN));
     }
+
+    function check_user($table,$where)
+    {
+        return $this->db->get_where($table,$where);
+    }
+
+    function get_user_data_by_id_login($id_tbl_login){
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $this->db->join('tbl_user_details', 'tbl_user_details.ID_USER_DETAILS = tbl_user.ID_USER_DETAILS', 'left');
+
+        $this->db->join('tbl_status_user', 'tbl_status_user.ID_STATUS_USER = tbl_user.ID_STATUS_USER', 'left');
+        
+        $this->db->where('ID_TBL_LOGIN', $id_tbl_login);
+        $query = $this->db->get(); 
+        if($query->num_rows() != 0)
+        {
+            return $query->row_array();
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

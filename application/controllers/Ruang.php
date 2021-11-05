@@ -16,7 +16,7 @@ class Ruang extends CI_Controller{
      */
     function index()
     {
-        $data['ruangs'] = $this->Ruang_model->get_all_ruangs();
+        $data['ruangs'] = $this->Ruang_model->get_all_ruangs_join();
         
         $data['_view'] = 'ruang/index';
         $this->load->view('layouts/main',$data);

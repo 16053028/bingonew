@@ -5,7 +5,7 @@
 <table class="table table-striped table-bordered">
     <tr>
 		<th>ID PELAJARAN</th>
-		<th>ID RUANG</th>
+		<th>NAMA RUANG</th>
 		<th>NAMA PELAJARAN</th>
 		<th>KETERANGAN PELAJARAN</th>
 		<th>Actions</th>
@@ -13,7 +13,7 @@
 	<?php foreach($pelajarans as $T){ ?>
     <tr>
 		<td><?php echo $T['ID_PELAJARAN']; ?></td>
-		<td><?php echo $T['ID_RUANG']; ?></td>
+		<td><?php echo $T['NAMA_RUANG']; ?></td>
 		<td><?php echo $T['NAMA_PELAJARAN']; ?></td>
 		<td><?php echo $T['KETERANGAN_PELAJARAN']; ?></td>
 		<td>

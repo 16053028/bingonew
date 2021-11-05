@@ -16,7 +16,7 @@ class Pelajaran extends CI_Controller{
      */
     function index()
     {
-        $data['pelajarans'] = $this->Pelajaran_model->get_all_pelajarans();
+        $data['pelajarans'] = $this->Pelajaran_model->get_all_pelajarans_join();
         
         $data['_view'] = 'pelajaran/index';
         $this->load->view('layouts/main',$data);

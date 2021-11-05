@@ -8,12 +8,29 @@ class Dashboard extends CI_Controller{
     function __construct()
     {
         parent::__construct();
+        $this->load->model('Login_model');
+        $this->load->model('Instansi_pendidikan_model');
+        $this->load->model('Status_user_model');
         
     }
 
     function index()
     {
+        $data['_spesific_script'] = 'layouts/_editors';
+        $data['_title_page'] = 'Dashboard';
+        
         $data['_view'] = 'dashboard';
+        
         $this->load->view('layouts/main',$data);
+    }
+
+    function logout(){
+        $paramsUpdate = array(
+                'isLogin' => 0
+            );
+
+        $this->Login_model->update_login($_SESSION['ID_TBL_LOGIN'],$paramsUpdate);
+        $this->session->sess_destroy();
+        redirect(base_url('login'));
     }
 }

@@ -53,4 +53,15 @@ class Soal_pelajaran_model extends CI_Model
     {
         return $this->db->delete('TBL_SOAL_PELAJARAN',array('ID_SOAL_PELAJARAN'=>$ID_SOAL_PELAJARAN));
     }
+
+    /*
+     * Get all soal_pelajarans Join
+     */
+    function get_all_soal_pelajarans_join()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_soal_pelajaran');
+        $this->db->join('tbl_pelajaran', 'tbl_pelajaran.ID_PELAJARAN = tbl_soal_pelajaran.ID_PELAJARAN', 'left');
+        return $this->db->get()->result_array();
+    }
 }

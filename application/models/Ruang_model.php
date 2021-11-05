@@ -53,4 +53,15 @@ class Ruang_model extends CI_Model
     {
         return $this->db->delete('TBL_RUANG',array('ID_RUANG'=>$ID_RUANG));
     }
+
+    /*
+     * Get all join ruangs
+     */
+    function get_all_ruangs_join()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_ruang');
+        $this->db->join('tbl_instansi_pendidikan', 'tbl_instansi_pendidikan.ID_INSTANSI_PENDIDIKAN = tbl_ruang.ID_INSTANSI_PENDIDIKAN', 'left');
+        return $this->db->get()->result_array();
+    }
 }

@@ -53,4 +53,16 @@ class Pelajaran_model extends CI_Model
     {
         return $this->db->delete('TBL_PELAJARAN',array('ID_PELAJARAN'=>$ID_PELAJARAN));
     }
+
+    /*
+     * Get all pelajarans Join
+     */
+    function get_all_pelajarans_join()
+    {
+
+        $this->db->select('*');
+        $this->db->from('tbl_pelajaran');
+        $this->db->join('tbl_ruang', 'tbl_ruang.ID_RUANG = tbl_pelajaran.ID_RUANG', 'left');
+        return $this->db->get()->result_array();
+    }
 }

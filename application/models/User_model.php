@@ -53,4 +53,18 @@ class User_model extends CI_Model
     {
         return $this->db->delete('TBL_USER',array('ID_USER'=>$ID_USER));
     }
+
+    /*
+     * Detail user
+     */
+    function get_all_user_join()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $this->db->join('tbl_user_details', 'tbl_user_details.ID_USER_DETAILS = tbl_user.ID_USER_DETAILS', 'left');
+        $this->db->join('tbl_status_user', 'tbl_status_user.ID_STATUS_USER = tbl_user.ID_STATUS_USER', 'left');
+        $this->db->join('tbl_login', 'tbl_login.ID_TBL_LOGIN = tbl_user.ID_TBL_LOGIN', 'left');
+
+        return $this->db->get()->result_array();
+    }
 }

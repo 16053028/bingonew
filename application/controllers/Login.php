@@ -16,10 +16,15 @@ class Login extends CI_Controller{
      */
     function index()
     {
-        $data['logins'] = $this->Login_model->get_all_logins();
-        
-        $data['_view'] = 'login/index';
-        $this->load->view('layouts/main',$data);
+
+        if (null !== $this->session->userdata('isLogin')) {
+            $data['logins'] = $this->Login_model->get_all_logins();
+            $data['_view'] = 'login/index';
+            $this->load->view('layouts/main',$data);
+        }else{
+
+            $this->load->view('login/f_login_index');
+        }
     }
 
     /*
@@ -31,8 +36,7 @@ class Login extends CI_Controller{
         {   
             $params = array(
 				'USERNAME_LOGIN' => $this->input->post('USERNAME_LOGIN'),
-				'PASSWORD_LOGIN' => $this->input->post('PASSWORD_LOGIN'),
-				'LAST_LOGIN' => $this->input->post('LAST_LOGIN'),
+				'PASSWORD_LOGIN' => md5($this->input->post('PASSWORD_LOGIN')),
             );
             
             $login_id = $this->Login_model->add_login($params);
@@ -60,7 +64,6 @@ class Login extends CI_Controller{
                 $params = array(
 					'USERNAME_LOGIN' => $this->input->post('USERNAME_LOGIN'),
 					'PASSWORD_LOGIN' => $this->input->post('PASSWORD_LOGIN'),
-					'LAST_LOGIN' => $this->input->post('LAST_LOGIN'),
                 );
 
                 $this->Login_model->update_login($ID_TBL_LOGIN,$params);            
@@ -91,6 +94,57 @@ class Login extends CI_Controller{
         }
         else
             show_error('The login you are trying to delete does not exist.');
+    }
+
+    function login_proses()
+    {
+        $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('PASSWORD_LOGIN','PASSWORD LOGIN','max_length[255]');
+            $this->form_validation->set_rules('USERNAME_LOGIN','USERNAME LOGIN','max_length[8]');
+        
+            if($this->form_validation->run())     
+            {   
+
+                $params = array(
+                    'USERNAME_LOGIN' => $this->input->post('USERNAME_LOGIN'),
+                    'PASSWORD_LOGIN' => md5($this->input->post('PASSWORD_LOGIN'))
+                );
+
+                $query = $this->Login_model->check_user('tbl_login',$params);            
+                $isFound = $query->num_rows();
+
+                $dataUser = $query->row_array();
+
+                if ($isFound) {
+                    $paramsUpdate = array(
+                        'isLogin' => 1,
+                    );
+
+                    $this->session->set_userdata($paramsUpdate);
+
+                    $this->Login_model->update_login($dataUser['ID_TBL_LOGIN'],$paramsUpdate);
+                    
+                    $this->_buat_data_sesi($dataUser['ID_TBL_LOGIN']);
+
+                    redirect(base_url('dashboard'));
+                    
+                } else {
+                    $this->session->set_flashdata('msg_error', 'Harap periksa ulang username dan password !');
+                    redirect(base_url('login'));
+                }
+            }
+            else
+            {
+                $this->session->set_flashdata('msg_error', 'Harap periksa ulang username dan password !');
+                redirect(base_url('login'));
+            }
+    }
+
+    private function _buat_data_sesi($ID_TBL_LOGIN){
+        $data = $this->Login_model->get_user_data_by_id_login($ID_TBL_LOGIN);
+        $this->session->set_userdata($data);
+        
     }
     
 }
