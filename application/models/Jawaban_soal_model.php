@@ -53,4 +53,23 @@ class Jawaban_soal_model extends CI_Model
     {
         return $this->db->delete('TBL_JAWABAN_SOAL',array('ID_JAWABAN_SOAL'=>$ID_JAWABAN_SOAL));
     }
+
+    /*
+     * function to show jawaban based on soal
+     */
+    function get_jawaban_soal_by_soal($ID_SOAL_PELAJARAN)
+    {
+        $this->db->select('*');
+        $this->db->from('TBL_JAWABAN_SOAL');
+        $this->db->join('TBL_SOAL_PELAJARAN', 'TBL_SOAL_PELAJARAN.ID_SOAL_PELAJARAN = TBL_JAWABAN_SOAL.ID_SOAL_PELAJARAN', 'left');
+        $this->db->where('TBL_JAWABAN_SOAL.ID_SOAL_PELAJARAN', $ID_SOAL_PELAJARAN);
+        return $this->db->get()->result_array();
+    }
+
+    function get_soal($ID_SOAL_PELAJARAN){
+        $this->db->select('*');
+        $this->db->from('TBL_SOAL_PELAJARAN');
+        $this->db->where('ID_SOAL_PELAJARAN', $ID_SOAL_PELAJARAN);
+        return $this->db->get()->result_array();
+    }
 }

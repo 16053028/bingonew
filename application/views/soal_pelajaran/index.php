@@ -15,7 +15,8 @@
 		<td><?php echo $T['NAMA_PELAJARAN']; ?></td>
 		<td><?php echo $T['TEKS_SOAL_PELAJARAN']; ?></td>
 		<td>
-            <a href="<?php echo site_url('soal_pelajaran/edit/'.$T['ID_SOAL_PELAJARAN']); ?>" class="btn btn-info btn-xs">Edit</a> 
+			<a href="<?php echo site_url('jawaban_soal/index/'.$T['ID_SOAL_PELAJARAN']); ?>" class="btn btn-info btn-xs">Jawaban</a> 
+            <a href="<?php echo site_url('soal_pelajaran/edit/'.$T['ID_SOAL_PELAJARAN']); ?>" class="btn btn-info btn-xs">Edit Soal</a> 
             <a href="<?php echo site_url('soal_pelajaran/remove/'.$T['ID_SOAL_PELAJARAN']); ?>" class="btn btn-danger btn-xs">Delete</a>
         </td>
     </tr>

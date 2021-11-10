@@ -1,18 +1,13 @@
-<?php echo form_open('jawaban_soal/add',array("class"=>"form-horizontal")); ?>
+<?php echo form_open('jawaban_soal/add/'.$this->uri->segment(3),array("class"=>"form-horizontal")); ?>
 
 	<div class="form-group">
 		<label for="ID_SOAL_PELAJARAN" class="col-md-4 control-label">Soal Pelajaran</label>
 		<div class="col-md-8">
 			<select name="ID_SOAL_PELAJARAN" class="form-control">
-				<option value="">select soal_pelajaran</option>
-				<?php 
-				foreach($all_soal_pelajarans as $soal_pelajaran)
-				{
-					$selected = ($soal_pelajaran['ID_SOAL_PELAJARAN'] == $this->input->post('ID_SOAL_PELAJARAN')) ? ' selected="selected"' : "";
-
-					echo '<option value="'.$soal_pelajaran['ID_SOAL_PELAJARAN'].'" '.$selected.'>'.$soal_pelajaran['TEKS_SOAL_PELAJARAN'].'</option>';
-				} 
-				?>
+				
+				<?php foreach ($all_soal_pelajarans as $soal_pelajaran): ?>
+					<option value="<?php echo $soal_pelajaran['ID_SOAL_PELAJARAN'] ?>" selected><?php echo $soal_pelajaran['TEKS_SOAL_PELAJARAN'] ?></option>
+				<?php endforeach ?>
 			</select>
 		</div>
 	</div>
@@ -20,11 +15,10 @@
 		<label for="IS_KEY" class="col-md-4 control-label">IS KEY</label>
 		<div class="col-md-8">
 			<select name="IS_KEY" class="form-control">
-				<option value="">select</option>
 				<?php 
 				$IS_KEY_values = array(
-					'0'=>'Kunci Jawaban',
-					'1'=>'Bukan Kunci Jawaban',
+					'1'=>'Kunci Jawaban',
+					'0'=>'Bukan Kunci Jawaban',
 				);
 
 				foreach($IS_KEY_values as $value => $display_text)

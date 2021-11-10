@@ -14,9 +14,9 @@ class Jawaban_soal extends CI_Controller{
     /*
      * Listing of jawaban_soals
      */
-    function index()
+    function index($ID_SOAL_PELAJARAN)
     {
-        $data['jawaban_soals'] = $this->Jawaban_soal_model->get_all_jawaban_soals();
+        $data['jawaban_soals'] = $this->Jawaban_soal_model->get_jawaban_soal_by_soal($ID_SOAL_PELAJARAN);
         
         $data['_view'] = 'jawaban_soal/index';
         $this->load->view('layouts/main',$data);
@@ -25,7 +25,7 @@ class Jawaban_soal extends CI_Controller{
     /*
      * Adding a new jawaban_soal
      */
-    function add()
+    function add($ID_SOAL_PELAJARAN)
     {   
         if(isset($_POST) && count($_POST) > 0)     
         {   
@@ -36,12 +36,12 @@ class Jawaban_soal extends CI_Controller{
             );
             
             $jawaban_soal_id = $this->Jawaban_soal_model->add_jawaban_soal($params);
-            redirect('jawaban_soal/index');
+            redirect(base_url('jawaban_soal/index/' . $params['ID_SOAL_PELAJARAN']));
         }
         else
         {
 			$this->load->model('Soal_pelajaran_model');
-			$data['all_soal_pelajarans'] = $this->Soal_pelajaran_model->get_all_soal_pelajarans();
+			$data['all_soal_pelajarans'] = $this->Jawaban_soal_model->get_soal($ID_SOAL_PELAJARAN);
             
             $data['_view'] = 'jawaban_soal/add';
             $this->load->view('layouts/main',$data);
@@ -51,7 +51,7 @@ class Jawaban_soal extends CI_Controller{
     /*
      * Editing a jawaban_soal
      */
-    function edit($ID_JAWABAN_SOAL)
+    function edit($ID_SOAL_PELAJARAN, $ID_JAWABAN_SOAL)
     {   
         // check if the jawaban_soal exists before trying to edit it
         $data['jawaban_soal'] = $this->Jawaban_soal_model->get_jawaban_soal($ID_JAWABAN_SOAL);
@@ -67,12 +67,12 @@ class Jawaban_soal extends CI_Controller{
                 );
 
                 $this->Jawaban_soal_model->update_jawaban_soal($ID_JAWABAN_SOAL,$params);            
-                redirect('jawaban_soal/index');
+                redirect(base_url('jawaban_soal/index/' . $params['ID_SOAL_PELAJARAN']));
             }
             else
             {
 				$this->load->model('Soal_pelajaran_model');
-				$data['all_soal_pelajarans'] = $this->Soal_pelajaran_model->get_all_soal_pelajarans();
+				$data['all_soal_pelajarans'] = $this->Jawaban_soal_model->get_soal($ID_SOAL_PELAJARAN);
 
                 $data['_view'] = 'jawaban_soal/edit';
                 $this->load->view('layouts/main',$data);
