@@ -22,6 +22,10 @@
 			<textarea name="TEKS_SOAL_PELAJARAN" class="form-control" id="TEKS_SOAL_PELAJARAN"><?php echo $this->input->post('TEKS_SOAL_PELAJARAN'); ?></textarea>
 		</div>
 	</div>
+
+	<div id="editor">
+		
+	</div>
 	
 	<div class="form-group">
 		<div class="col-sm-offset-4 col-sm-8">

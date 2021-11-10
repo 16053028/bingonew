@@ -39,6 +39,8 @@ class Soal_pelajaran extends CI_Controller{
         }
         else
         {
+            $data['_spesific_script'] = 'layouts/_editors';
+
 			$this->load->model('Pelajaran_model');
 			$data['all_pelajarans'] = $this->Pelajaran_model->get_all_pelajarans();
             
@@ -52,6 +54,8 @@ class Soal_pelajaran extends CI_Controller{
      */
     function edit($ID_SOAL_PELAJARAN)
     {   
+        $data['_spesific_script'] = 'layouts/_editors';
+
         // check if the soal_pelajaran exists before trying to edit it
         $data['soal_pelajaran'] = $this->Soal_pelajaran_model->get_soal_pelajaran($ID_SOAL_PELAJARAN);
         
