@@ -18,6 +18,19 @@ class Jawaban_soal_model extends CI_Model
     {
         return $this->db->get_where('TBL_JAWABAN_SOAL',array('ID_JAWABAN_SOAL'=>$ID_JAWABAN_SOAL))->row_array();
     }
+
+     /*
+     * Get jawaban_soal by ID_JAWABAN_SOAL
+     */
+    function get_jawaban_soal_by_id_soal($ID_SOAL_PELAJARAN)
+    {
+        $this->db->select('*');
+        $this->db->from('TBL_JAWABAN_SOAL');
+        $this->db->where('ID_SOAL_PELAJARAN', $ID_SOAL_PELAJARAN);
+        $query =$this->db->get();
+
+        return $query->result_array();
+    }
         
     /*
      * Get all jawaban_soals

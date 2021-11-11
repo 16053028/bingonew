@@ -7,6 +7,7 @@
 	      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 	        <div class="card border-dark shadow-2-strong" style="border-radius: 1rem;">
 	          <div class="card-body p-5 text-center">
+	          	
 	          	<h1>Pilih Materi</h1>
 
 	          	<hr class="my-4">
@@ -19,7 +20,7 @@
 	          		.'/'
 	          		.$_SESSION['id_ruang']
 	          		.'/'
-	          		.$_SESSION['id_pelajaran']
+	          		.$materi_pelajaran['ID_PELAJARAN']
 	          		); ?>" class="btn btn-primary btn-block"><?php echo $materi_pelajaran['NAMA_PELAJARAN']; ?></a>
 	          	<?php endforeach ?>
 	          </div>

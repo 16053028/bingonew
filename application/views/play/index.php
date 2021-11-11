@@ -12,12 +12,12 @@
 	            <h1>E-Bingo App</h1>
 	            	
 	            	<?php                    
-			            if(isset($id_session) && $id_session)
-			                echo $id_session;
+			            if(isset($_SESSION['id_session']))
+			                echo $_SESSION['id_session'];
 			        ?>
 	            
 	            <hr class="my-4">
-	            <a href="<?php echo base_url('play/pilih_pelajaran/' . $id_session . '/') ?>" class="btn btn-primary btn-block">Play</a>
+	            <a href="<?php echo base_url('play/pilih_pelajaran/' . $_SESSION['id_session'] . '/') ?>" class="btn btn-primary btn-block">Play</a>
 	          	
 
 	          </div>

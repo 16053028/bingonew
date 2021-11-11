@@ -32,5 +32,16 @@
 	<script src="<?php echo base_url('resources/bootstrap-413/js/bootstrap.min.js'); ?>"></script>
 	<script src="<?php echo base_url('resources/plugins/jquery/jquery.min.js'); ?>"></script>
 	<script  src="<?php echo base_url('resources/bingo-card/') ?>script.js"></script>
+<!-- 	<script>
+		$( document ).ready(function() {
+		  var audio = document.createElement('audio');
+			audio.setAttribute('src', '<?php echo base_url('resources/sounds/soundtrack.ogg') ?>');
+			audio.setAttribute('autoplay', 'autoplay');
+			audio.addEventListener('ended', function() {
+			    this.currentTime = 0;
+			    this.play();
+			}, false);
+					});
+	</script> -->
 </body>
 </html>
