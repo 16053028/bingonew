@@ -77,4 +77,15 @@ class Login_model extends CI_Model
             return false;
         }
     }
+
+    // return JSON data
+
+    function get_logins_json($data)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_login');
+        $this->db->where('USERNAME_LOGIN', $data); 
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

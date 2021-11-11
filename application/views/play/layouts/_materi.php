@@ -7,19 +7,21 @@
 	      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 	        <div class="card border-dark shadow-2-strong" style="border-radius: 1rem;">
 	          <div class="card-body p-5 text-center">
-	          	
-	            <img src="<?php echo base_url('resources/img/logo.png'); ?>">
-	            <h1>E-Bingo App</h1>
-	            	
-	            	<?php                    
-			            if(isset($id_session) && $id_session)
-			                echo $id_session;
-			        ?>
-	            
-	            <hr class="my-4">
-	            <a href="<?php echo base_url('play/pilih_pelajaran/' . $id_session . '/') ?>" class="btn btn-primary btn-block">Play</a>
-	          	
+	          	<h1>Pilih Materi</h1>
 
+	          	<hr class="my-4">
+	          	<?php foreach ($materi_pelajarans as $materi_pelajaran): ?>
+	          		<a href="
+	          		<?php 
+	          		echo base_url(
+	          		'play/create_game/'
+	          		.$_SESSION['id_session']
+	          		.'/'
+	          		.$_SESSION['id_ruang']
+	          		.'/'
+	          		.$_SESSION['id_pelajaran']
+	          		); ?>" class="btn btn-primary btn-block"><?php echo $materi_pelajaran['NAMA_PELAJARAN']; ?></a>
+	          	<?php endforeach ?>
 	          </div>
 	        </div>
 	      </div>

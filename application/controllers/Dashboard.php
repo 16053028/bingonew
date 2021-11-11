@@ -33,4 +33,14 @@ class Dashboard extends CI_Controller{
         $this->session->sess_destroy();
         redirect(base_url('login'));
     }
+
+    function testjson($data){ 
+          // bisa juga menggunakaan-> $_POST['input_ajx'] 
+          $ini = $this->Login_model->get_logins_json($data);
+          echo json_encode($ini);
+    }
+
+    function jsoncoba(){
+        $this->load->view('cobajson');
+    }
 }

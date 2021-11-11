@@ -18,6 +18,15 @@ class Pelajaran_model extends CI_Model
     {
         return $this->db->get_where('TBL_PELAJARAN',array('ID_PELAJARAN'=>$ID_PELAJARAN))->row_array();
     }
+
+      /*
+     * Get pelajaran by ID_RUANG
+     */
+    function get_pelajaran_by_ruang($ID_RUANG)
+    {
+        return $this->db->get_where('TBL_PELAJARAN',array('ID_RUANG'=>$ID_RUANG))->result_array();
+    }
+
         
     /*
      * Get all pelajarans
