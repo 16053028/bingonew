@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2021 at 09:59 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Nov 11, 2021 at 05:53 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -328,6 +328,32 @@ INSERT INTO `tbl_pelajaran` (`ID_PELAJARAN`, `ID_RUANG`, `NAMA_PELAJARAN`, `KETE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_play`
+--
+
+CREATE TABLE `tbl_play` (
+  `ID_PLAY` int(11) NOT NULL,
+  `ID_SESSION` varchar(50) DEFAULT NULL,
+  `ID_RUANG` int(11) DEFAULT NULL,
+  `ID_PELAJARAN` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_play_detail`
+--
+
+CREATE TABLE `tbl_play_detail` (
+  `ID_PLAY_DETAIL` int(11) NOT NULL,
+  `ID_SESSION` varchar(50) DEFAULT NULL,
+  `ID_SOAL_PELAJARAN` int(11) NOT NULL,
+  `isAnswer` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_ruang`
 --
 
@@ -543,6 +569,23 @@ ALTER TABLE `tbl_pelajaran`
   ADD KEY `FK_HAS_PELAJARAN` (`ID_RUANG`);
 
 --
+-- Indexes for table `tbl_play`
+--
+ALTER TABLE `tbl_play`
+  ADD PRIMARY KEY (`ID_PLAY`),
+  ADD UNIQUE KEY `Index 4` (`ID_SESSION`),
+  ADD KEY `FK_GAME_HAS_PELAJARAN` (`ID_PELAJARAN`),
+  ADD KEY `FK_GAME_HAS_RUANG` (`ID_RUANG`);
+
+--
+-- Indexes for table `tbl_play_detail`
+--
+ALTER TABLE `tbl_play_detail`
+  ADD PRIMARY KEY (`ID_PLAY_DETAIL`),
+  ADD KEY `FK_PLAY_DETAIL_HAS_SOAL` (`ID_SOAL_PELAJARAN`),
+  ADD KEY `FK_tbl_play_detail_tbl_play` (`ID_SESSION`);
+
+--
 -- Indexes for table `tbl_ruang`
 --
 ALTER TABLE `tbl_ruang`
@@ -642,6 +685,18 @@ ALTER TABLE `tbl_pelajaran`
   MODIFY `ID_PELAJARAN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_play`
+--
+ALTER TABLE `tbl_play`
+  MODIFY `ID_PLAY` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_play_detail`
+--
+ALTER TABLE `tbl_play_detail`
+  MODIFY `ID_PLAY_DETAIL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+
+--
 -- AUTO_INCREMENT for table `tbl_ruang`
 --
 ALTER TABLE `tbl_ruang`
@@ -719,6 +774,20 @@ ALTER TABLE `tbl_menu`
 --
 ALTER TABLE `tbl_pelajaran`
   ADD CONSTRAINT `FK_HAS_PELAJARAN` FOREIGN KEY (`ID_RUANG`) REFERENCES `tbl_ruang` (`ID_RUANG`);
+
+--
+-- Constraints for table `tbl_play`
+--
+ALTER TABLE `tbl_play`
+  ADD CONSTRAINT `FK_GAME_HAS_PELAJARAN` FOREIGN KEY (`ID_PELAJARAN`) REFERENCES `tbl_pelajaran` (`ID_PELAJARAN`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_GAME_HAS_RUANG` FOREIGN KEY (`ID_RUANG`) REFERENCES `tbl_ruang` (`ID_RUANG`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tbl_play_detail`
+--
+ALTER TABLE `tbl_play_detail`
+  ADD CONSTRAINT `FK_PLAY_DETAIL_HAS_SOAL` FOREIGN KEY (`ID_SOAL_PELAJARAN`) REFERENCES `tbl_soal_pelajaran` (`ID_SOAL_PELAJARAN`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_tbl_play_detail_tbl_play` FOREIGN KEY (`ID_SESSION`) REFERENCES `tbl_play` (`ID_SESSION`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tbl_ruang`
