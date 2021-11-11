@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 05:53 PM
+-- Generation Time: Nov 11, 2021 at 06:01 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -322,7 +322,6 @@ CREATE TABLE `tbl_pelajaran` (
 --
 
 INSERT INTO `tbl_pelajaran` (`ID_PELAJARAN`, `ID_RUANG`, `NAMA_PELAJARAN`, `KETERANGAN_PELAJARAN`) VALUES
-(1, 1, 'Matematika', 'Matematika Semester 1'),
 (2, 2, 'Materi I', 'Materi Media pembelajaran I');
 
 -- --------------------------------------------------------
@@ -369,7 +368,6 @@ CREATE TABLE `tbl_ruang` (
 --
 
 INSERT INTO `tbl_ruang` (`ID_RUANG`, `ID_INSTANSI_PENDIDIKAN`, `NAMA_RUANG`, `KETERANGAN_RUANG`) VALUES
-(1, 1, 'G3.1', 'Ruang Semester 1'),
 (2, 1, 'MEDIA PEMBELAJARAN', 'Materi Media Pembelajaran');
 
 -- --------------------------------------------------------
@@ -793,7 +791,7 @@ ALTER TABLE `tbl_play_detail`
 -- Constraints for table `tbl_ruang`
 --
 ALTER TABLE `tbl_ruang`
-  ADD CONSTRAINT `FK_HAS_RUANG` FOREIGN KEY (`ID_INSTANSI_PENDIDIKAN`) REFERENCES `tbl_instansi_pendidikan` (`ID_INSTANSI_PENDIDIKAN`);
+  ADD CONSTRAINT `FK_HAS_RUANG` FOREIGN KEY (`ID_INSTANSI_PENDIDIKAN`) REFERENCES `tbl_instansi_pendidikan` (`ID_INSTANSI_PENDIDIKAN`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `tbl_soal_pelajaran`
