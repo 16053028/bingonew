@@ -6,17 +6,17 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <?php 
+          <!-- <?php 
             if ($this->session->flashdata('msg_benar') !='') {
                 echo '<div class="alert alert-success" role="alert">';
                 echo $this->session->flashdata('msg_benar');
                 echo '</div>';
-              } elseif ($this->session->flashdata('msg_salah') !='') {
+              } else if ($this->session->flashdata('msg_salah') !='') {
                 echo '<div class="alert alert-danger" role="alert">';
                 echo $this->session->flashdata('msg_salah');
                 echo '</div>';
               }
-          ?>
+          ?> -->
           <div class="card border-dark shadow-2-strong" style="border-radius: 0.5rem;">
             <div class="card-header">
               <div class="d-flex flex-row justify-content-lg-between">
@@ -38,7 +38,7 @@
                       $btnStyle = "btn-warning";
                     } else if ($soal['isAnswer'] == 2){
                       $state = "disabled";
-                      $btnStyle = "btn-secondary";
+                      $btnStyle = "btn-danger";
                     }else{
 
                     }

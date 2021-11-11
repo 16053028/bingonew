@@ -12,10 +12,12 @@ class Play extends CI_Controller {
 	public function index()
 	{
 		if (isset($_SESSION['id_session'])) {
-			$data['_view'] = 'play/index';
-			$this->load->view('play/layouts/main', $data);
+			redirect(base_url('play/pilih_pelajaran/'.$_SESSION['id_session']));
+
+			// $data['_view'] = 'play/index';
+			// $this->load->view('play/layouts/main', $data);
 		}else{
-			$this->_createSessionData();
+			// $this->_createSessionData();
 			$data['_view'] = 'play/index';
 			$this->load->view('play/layouts/main', $data);
 		}
@@ -24,28 +26,38 @@ class Play extends CI_Controller {
 
 	public function pilih_pelajaran($id_session)	
 	{
-
+		if (isset($_SESSION['id_ruang'])) {
+			redirect(base_url('play/pilih_materi/'.$_SESSION['id_ruang']));
+		}else{
 		$this->load->model('Ruang_model');
 
 		$data['all_ruangs'] = $this->Ruang_model->get_all_ruangs();
 
 		$data['_view'] = 'play/_pelajaran';
 		$this->load->view('play/layouts/main', $data);
+		}
+
+		
 	}
 
 	public function pilih_materi($id_ruang)	
 	{
-		$array = array(
+		if (isset($_SESSION['id_ruang'])) {
+			redirect(base_url('play/play_game'));
+		}else{
+			$array = array(
 			'id_ruang' => $id_ruang
-		);
-		$this->session->set_userdata( $array );
+			);
+			$this->session->set_userdata( $array );
 
-		$this->load->model('Pelajaran_model');		
+			$this->load->model('Pelajaran_model');		
 
-		$data['materi_pelajarans'] = $this->Pelajaran_model->get_pelajaran_by_ruang($id_ruang);
+			$data['materi_pelajarans'] = $this->Pelajaran_model->get_pelajaran_by_ruang($id_ruang);
 
-		$data['_view'] = 'play/_materi';
-		$this->load->view('play/layouts/main', $data);
+			$data['_view'] = 'play/_materi';
+			$this->load->view('play/layouts/main', $data);
+		}
+		
 	}
 
 	function create_game($id_session, $id_ruang, $id_pelajaran){
@@ -99,12 +111,12 @@ class Play extends CI_Controller {
 			$params = array(
 				'isAnswer' => '1'
 			);
-			$this->session->set_flashdata('msg_benar', 'Jawaban anda benar');
+			// $this->session->set_flashdata('msg_benar', 'Jawaban anda benar');
 		}else{
 			$params = array(
 				'isAnswer' => '2'
 			);
-			$this->session->set_flashdata('msg_salah', 'Jawaban anda salah');
+			// $this->session->set_flashdata('msg_salah', 'Jawaban anda salah');
 		}
 		$this->Play_model->update_play_detail($jawaban_db['ID_SOAL_PELAJARAN'],$params);
 		redirect(base_url('play/play_game'));
@@ -117,12 +129,13 @@ class Play extends CI_Controller {
 		redirect(base_url('play'));
 	}
 
-	private function _createSessionData(){
+	 function createSessionData(){
 		$data['id_session'] = uniqid();
 		$array = array(
 			'id_session' => $data['id_session']
 		);
-		return $this->session->set_userdata( $array );
+		$this->session->set_userdata( $array );
+		redirect('','refresh');
 	}
 
 	function _array_random_soal(){
