@@ -44,12 +44,10 @@
                     }
                     ?>
 
-
-
                     <?php if (fmod($x,5) == 0): ?>
                       <div class="col-lg-2 col-md-6">
                         <a href="<?php echo base_url('play/lihat_soal/' . $soal['ID_SOAL_PELAJARAN']) . '/'?>" class="btn <?php echo $state; ?> <?php echo $btnStyle; ?> btn-primary btn-block">
-                         <?php echo $x ?>
+                         <?php echo $soal['NUMB_BOARD']; ?>
                        </a>
                       </div>
                       </div>   
@@ -57,7 +55,7 @@
                     <?php else: ?>
                      <div class="col-lg-2 col-md-6">
                        <a href="<?php echo base_url('play/lihat_soal/' . $soal['ID_SOAL_PELAJARAN']) . '/'?>" class="btn <?php echo $state; ?> <?php echo $btnStyle; ?> btn-primary btn-block">
-                         <?php echo $x ?>
+                         <?php echo $soal['NUMB_BOARD']; ?>
                        </a>
                      </div>    
                     <?php endif ?> 
@@ -81,6 +79,10 @@
   </section>
   </div>
   <div class="p-2 bd-highlight align-self-center flex-fill">
-
+    <div class="container bg-primary text-white">
+      <div class="text-center">
+        <strong><p>Warna <span class="text-danger">Merah</span> jika jawaban anda salah. Warna <span class="text-warning">Kuning</span> jika jawaban anda benar</p></strong>
+      </div>
+    </div>
   </div>
 </div>

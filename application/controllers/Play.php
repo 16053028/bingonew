@@ -97,6 +97,8 @@ class Play extends CI_Controller {
 		$data['soal_pelajaran'] = $this->Soal_pelajaran_model->get_soal_pelajaran($id_soal);
 		$data['jawaban_soals'] = $this->Jawaban_soal_model->get_jawaban_soal_by_id_soal($id_soal);
 
+		$shuf_jawaban = shuffle($data['jawaban_soals']);
+
 		$data['_view'] = 'play/_soal';
 		$this->load->view('play/layouts/main', $data);
 	}
@@ -139,14 +141,23 @@ class Play extends CI_Controller {
 	}
 
 	function _array_random_soal(){
+        $numb = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25);
+        $shuf_numb = shuffle($numb);
+
 		$dataSoal = $this->Play_model->get_random_soal($_SESSION['id_pelajaran']);
 		$random_soal = shuffle($dataSoal);
+		$x=0;
 		foreach ($dataSoal as $soal) {
+			
 		    $params = array(
 		    	"ID_SESSION"		=> $_SESSION['id_session'],
-		    	"ID_SOAL_PELAJARAN"	=> $soal['ID_SOAL_PELAJARAN']
+		    	"ID_SOAL_PELAJARAN"	=> $soal['ID_SOAL_PELAJARAN'],
+		    	"NUMB_BOARD"		=> $numb[$x]
 		    );
+		
 		    $this->Play_model->insert_play_detail($params);
+
+		    $x++;
 		}
 
 		$array = array(
