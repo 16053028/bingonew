@@ -80,15 +80,23 @@ class Play extends CI_Controller {
 
 	public function play_game(){
 		if (isset($_SESSION['alreadyGenerated'])) {
-			$data['soal_random'] = $this->Play_model->get_play_detail_join_soal($_SESSION['id_session']);
-			$data['_view'] = 'play/_game';
-			$this->load->view('play/layouts/main', $data);
+			$win_cond = $this->cek_win();
+
+			if($win_cond == 1){
+				$data['_view'] = 'play/_win';
+				$this->load->view('play/layouts/main', $data);
+			}else{
+				$data['soal_random'] = $this->Play_model->get_play_detail_join_soal($_SESSION['id_session']);
+				$data['_view'] = 'play/_game';
+				$this->load->view('play/layouts/main', $data);
+			}
 		}else{
 			$this->_array_random_soal();
 			redirect(base_url('play/play_game'));
 		}
 		
 	}
+
 
 	public function lihat_soal($id_soal){
 		$this->load->model('Soal_pelajaran_model');
@@ -122,6 +130,136 @@ class Play extends CI_Controller {
 		}
 		$this->Play_model->update_play_detail($jawaban_db['ID_SOAL_PELAJARAN'],$params);
 		redirect(base_url('play/play_game'));
+
+	}
+
+	function cek_win(){
+		$isAnswer = $this->Play_model->get_play_detail($_SESSION['id_session']);
+
+		echo implode(" ",$isAnswer[0]);
+
+		// horinzontal cek
+		if (
+			(implode(" ",$isAnswer[0]) == '1') AND
+			(implode(" ",$isAnswer[1]) == '1') AND
+			(implode(" ",$isAnswer[2]) == '1') AND
+			(implode(" ",$isAnswer[3]) == '1') AND
+			(implode(" ",$isAnswer[4]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[5]) == '1') AND
+			(implode(" ",$isAnswer[6]) == '1') AND
+			(implode(" ",$isAnswer[7]) == '1') AND
+			(implode(" ",$isAnswer[8]) == '1') AND
+			(implode(" ",$isAnswer[9]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[10]) == '1') AND
+			(implode(" ",$isAnswer[11]) == '1') AND
+			(implode(" ",$isAnswer[12]) == '1') AND
+			(implode(" ",$isAnswer[13]) == '1') AND
+			(implode(" ",$isAnswer[14]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[15]) == '1') AND
+			(implode(" ",$isAnswer[16]) == '1') AND
+			(implode(" ",$isAnswer[17]) == '1') AND
+			(implode(" ",$isAnswer[18]) == '1') AND
+			(implode(" ",$isAnswer[19]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[20]) == '1') AND
+			(implode(" ",$isAnswer[21]) == '1') AND
+			(implode(" ",$isAnswer[22]) == '1') AND
+			(implode(" ",$isAnswer[23]) == '1') AND
+			(implode(" ",$isAnswer[24]) == '1') 
+		) {
+			return 1;
+		}
+
+		// vertical cek
+		if (
+			(implode(" ",$isAnswer[0]) == '1') AND
+			(implode(" ",$isAnswer[5]) == '1') AND
+			(implode(" ",$isAnswer[10]) == '1') AND
+			(implode(" ",$isAnswer[15]) == '1') AND
+			(implode(" ",$isAnswer[20]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[1]) == '1') AND
+			(implode(" ",$isAnswer[6]) == '1') AND
+			(implode(" ",$isAnswer[11]) == '1') AND
+			(implode(" ",$isAnswer[16]) == '1') AND
+			(implode(" ",$isAnswer[21]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[2]) == '1') AND
+			(implode(" ",$isAnswer[7]) == '1') AND
+			(implode(" ",$isAnswer[12]) == '1') AND
+			(implode(" ",$isAnswer[17]) == '1') AND
+			(implode(" ",$isAnswer[22]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[3]) == '1') AND
+			(implode(" ",$isAnswer[8]) == '1') AND
+			(implode(" ",$isAnswer[13]) == '1') AND
+			(implode(" ",$isAnswer[18]) == '1') AND
+			(implode(" ",$isAnswer[23]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[4]) == '1') AND
+			(implode(" ",$isAnswer[9]) == '1') AND
+			(implode(" ",$isAnswer[14]) == '1') AND
+			(implode(" ",$isAnswer[19]) == '1') AND
+			(implode(" ",$isAnswer[24]) == '1') 
+		) {
+			return 1;
+		}
+
+		// diagonal cek
+		if (
+			(implode(" ",$isAnswer[0]) == '1') AND
+			(implode(" ",$isAnswer[6]) == '1') AND
+			(implode(" ",$isAnswer[12]) == '1') AND
+			(implode(" ",$isAnswer[18]) == '1') AND
+			(implode(" ",$isAnswer[24]) == '1') 
+		) {
+			return 1;
+		}
+
+		if (
+			(implode(" ",$isAnswer[4]) == '1') AND
+			(implode(" ",$isAnswer[8]) == '1') AND
+			(implode(" ",$isAnswer[12]) == '1') AND
+			(implode(" ",$isAnswer[16]) == '1') AND
+			(implode(" ",$isAnswer[20]) == '1') 
+		) {
+			return 1;
+		}		
 
 	}
 

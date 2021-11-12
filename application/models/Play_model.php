@@ -47,6 +47,15 @@ class Play_model extends CI_Model {
         return $query->result_array();
     }
 
+    function get_play_detail($id_session){
+        $this->db->select('isAnswer');
+        $this->db->from('tbl_play_detail');
+        $this->db->where('ID_SESSION', $id_session);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     function delete_play($ID_SESSION)
     {
         return $this->db->delete('TBL_play',array('ID_SESSION'=>$ID_SESSION));

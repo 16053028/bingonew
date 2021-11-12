@@ -17,14 +17,14 @@
                 echo '</div>';
               }
           ?> -->
-          <div class="card border-dark shadow-2-strong" style="border-radius: 0.5rem;">
+          <div class="card border-dark shadow-2-strong bg-light" style="border-radius: 0.5rem;">
             <div class="card-header">
               <div class="d-flex flex-row justify-content-lg-between">
-                <div class="p-2">B</div>
-                <div class="p-2">I</div>
-                <div class="p-2">N</div>
-                <div class="p-2">G</div>
-                <div class="p-2">O</div>
+                <div class="p-2"><h1>B</h1></div>
+                <div class="p-2"><h1>I</h1></div>
+                <div class="p-2"><h1>N</h1></div>
+                <div class="p-2"><h1>G</h1></div>
+                <div class="p-2"><h1>O</h1></div>
               </div>
             </div>
             <div class="card-body bg-primary">
@@ -65,10 +65,13 @@
 
               </div>
 
-              <div class="card-footer">
-                <a href="<?php echo base_url('play/akhiri_permainan') ?>" class="btn btn-danger btn-block">
+              <div class="card-footer bg-dark">
+                <div class="text-center text-white">
+                  <strong><p>Warna <span class="text-danger">Merah</span> jika jawaban anda salah.<br /> Warna <span class="text-warning">Kuning</span> jika jawaban anda benar</p></strong>
+                </div>
+                <!-- <a href="<?php echo base_url('play/akhiri_permainan') ?>" class="btn btn-danger btn-block">
                   Akhiri permainan
-                </a>
+                </a> -->
               </div>
     
             </div>
@@ -80,9 +83,7 @@
   </div>
   <div class="p-2 bd-highlight align-self-center flex-fill">
     <div class="container bg-primary text-white">
-      <div class="text-center">
-        <strong><p>Warna <span class="text-danger">Merah</span> jika jawaban anda salah. Warna <span class="text-warning">Kuning</span> jika jawaban anda benar</p></strong>
-      </div>
+      
     </div>
   </div>
 </div>
