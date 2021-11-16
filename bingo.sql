@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 06:01 PM
+-- Generation Time: Nov 16, 2021 at 06:49 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -347,6 +347,7 @@ CREATE TABLE `tbl_play_detail` (
   `ID_PLAY_DETAIL` int(11) NOT NULL,
   `ID_SESSION` varchar(50) DEFAULT NULL,
   `ID_SOAL_PELAJARAN` int(11) NOT NULL,
+  `NUMB_BOARD` int(11) DEFAULT NULL,
   `isAnswer` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -686,13 +687,13 @@ ALTER TABLE `tbl_pelajaran`
 -- AUTO_INCREMENT for table `tbl_play`
 --
 ALTER TABLE `tbl_play`
-  MODIFY `ID_PLAY` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_PLAY` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_play_detail`
 --
 ALTER TABLE `tbl_play_detail`
-  MODIFY `ID_PLAY_DETAIL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `ID_PLAY_DETAIL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=451;
 
 --
 -- AUTO_INCREMENT for table `tbl_ruang`
