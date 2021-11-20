@@ -7,13 +7,20 @@
 	      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 	        <div class="card border-dark shadow-2-strong" style="border-radius: 1rem;">
 	          <div class="card-body p-5 text-center">
-	          	
+	          	<?php echo form_open('play/createSessionData'); ?>
 	            <img src="<?php echo base_url('resources/img/logo.png'); ?>">
 	            <h1>E-Bingo App</h1>
+
+	            <div class="form-group">
+						    <label for="NAMA_PEMAIN">Nama Lengkap</label>
+						    <input type="text" class="form-control" id="NAMA_PEMAIN" name="NAMA_PEMAIN" aria-describedby="namaPemainHelp" placeholder="Nama Lengkap">
+						    <small id="namaPemainHelp" class="form-text text-muted">Nama Lengkap anda akan muncul pada list pemain</small>
+						  </div>
 	            
 	            <hr class="my-4">
-	            <a href="<?php echo base_url('play/createSessionData') ?>" class="btn btn-primary btn-block">Play</a>
-	          	
+	            <button type="submit" class="btn btn-primary btn-block">Play</button>
+	            <!-- <a href="<?php echo base_url() ?>" class="btn btn-primary btn-block">Play</a> -->
+							<?php echo form_close(); ?>	          	
 
 	          </div>
 	        </div>

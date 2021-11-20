@@ -13,6 +13,18 @@ class Play_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    /*
+     * function get play data
+     */
+    function get_play_data()
+    {
+        $this->db->select('NAMA_PEMAIN');
+        $this->db->from('tbl_play');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     function update_play($ID_SESSION,$params)
     {
         $this->db->where('tbl_play',$ID_MENU);

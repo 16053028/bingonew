@@ -68,9 +68,10 @@ class Play extends CI_Controller {
 		$this->session->set_userdata( $array );
 
 		$dataInsert = array(
-			'ID_SESSION' => $_SESSION['id_session'],
-			'ID_RUANG' => $_SESSION['id_ruang'],
-			'ID_PELAJARAN' => $_SESSION['id_pelajaran']
+			'ID_SESSION' 	=> $_SESSION['id_session'],
+			'ID_RUANG'		=> $_SESSION['id_ruang'],
+			'ID_PELAJARAN'	=> $_SESSION['id_pelajaran'],
+			'NAMA_PEMAIN'	=> $_SESSION['NAMA_PEMAIN']
 		);
 		$this->Play_model->insert_play($dataInsert);
 
@@ -87,6 +88,7 @@ class Play extends CI_Controller {
 				$this->load->view('play/layouts/main', $data);
 			}else{
 				$data['soal_random'] = $this->Play_model->get_play_detail_join_soal($_SESSION['id_session']);
+				$data['list_pemain'] = $this->Play_model->get_play_data();
 				$data['_view'] = 'play/_game';
 				$this->load->view('play/layouts/main', $data);
 			}
@@ -272,7 +274,8 @@ class Play extends CI_Controller {
 	 function createSessionData(){
 		$data['id_session'] = uniqid();
 		$array = array(
-			'id_session' => $data['id_session']
+			'id_session' 	=> $data['id_session'],
+			'NAMA_PEMAIN'	=> $this->input->post('NAMA_PEMAIN')
 		);
 		$this->session->set_userdata( $array );
 		redirect('','refresh');
